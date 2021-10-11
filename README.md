@@ -30,7 +30,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: argo-cluster-admin
+  name: cluster-admin
 subjects:
 - kind: ServiceAccount
   name: admin-user
@@ -76,12 +76,13 @@ argocd account update-password --current-password $PASS --new-password admin
 ```
 #### install Argo events & Argo workflows
 ```sh
+kubectl create namespace argo
 kubectl apply -n argocd -f argo-systems.yaml
 ```
 
 #### Get token
 ```sh
-echo "Bearer $(kubectl -n argo get secret $(kubectl -n argo get sa/argo-admin -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}")"
+echo "Bearer $(kubectl -n argo get secret $(kubectl -n argo get sa/argo-server -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}")"
 ```
 
 
