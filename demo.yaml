@@ -10,7 +10,7 @@ items:
     spec:
       project: default
       source:
-        repoURL: https://github.com/alexmt/argo-combined-demo.git
+        repoURL: https://github.com/BhawaniSingh/argo-combined-demo.git
         path: infrastructure/argo-events
       destination: &dest
         server: "https://kubernetes.default.svc"
@@ -23,56 +23,14 @@ items:
   - apiVersion: argoproj.io/v1alpha1
     kind: Application
     metadata:
-      name: argo-rollouts
-      labels:
-        type: infrastructure
-    spec:
-      project: default
-      source:
-        repoURL: https://github.com/alexmt/argo-combined-demo.git
-        path: infrastructure/argo-rollouts
-      destination: *dest
-      syncPolicy: *policy
-
-  - apiVersion: argoproj.io/v1alpha1
-    kind: Application
-    metadata:
       name: argo-workflows
       labels:
         type: infrastructure
     spec:
       project: default
       source:
-        repoURL: https://github.com/alexmt/argo-combined-demo.git
+        repoURL: https://github.com/BhawaniSingh/argo-combined-demo.git
         path: infrastructure/argo-workflow
-      destination: *dest
-      syncPolicy: *policy
-
-  - apiVersion: argoproj.io/v1alpha1
-    kind: Application
-    metadata:
-      name: minio
-      labels:
-        type: infrastructure
-    spec:
-      project: default
-      source:
-        repoURL: https://github.com/alexmt/argo-combined-demo.git
-        path: infrastructure/minio
-      destination: *dest
-      syncPolicy: *policy
-
-  - apiVersion: argoproj.io/v1alpha1
-    kind: Application
-    metadata:
-      name: web-service
-      labels:
-        type: application
-    spec:
-      project: default
-      source:
-        repoURL: https://github.com/alexmt/argo-combined-demo.git
-        path: web-service
       destination: *dest
       syncPolicy: *policy
 
