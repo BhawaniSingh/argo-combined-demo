@@ -30,7 +30,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: cluster-admin
+  name: argo-cluster-admin
 subjects:
 - kind: ServiceAccount
   name: admin-user
@@ -73,11 +73,10 @@ PASS=$(kubectl --namespace argocd get pods --selector app.kubernetes.io/name=arg
 argocd context test-argocd --delete
 argocd login --name test-argocd --insecure --username admin --password $PASS 127.0.0.1:8443
 argocd account update-password --current-password $PASS --new-password admin
-kubectl create rolebinding default-admin --clusterrole=admin --serviceaccount=argo:default -n argo
 ```
 #### install Argo events & Argo workflows
 ```sh
-kubectl apply -n argocd -f demo.yaml
+kubectl apply -n argocd -f argo-systems.yaml
 ```
 
 #### Get token
