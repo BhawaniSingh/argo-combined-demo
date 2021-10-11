@@ -1,12 +1,12 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
-  name: workflow-role-binding
-  namespace: argo
+  name: admin-user
 roleRef:
   apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: workflow-role
+  kind: ClusterRole
+  name: cluster-admin
 subjects:
-- kind: ServiceAccount
-  name: default
+  - kind: ServiceAccount
+    name: admin-user
+    namespace: argo
