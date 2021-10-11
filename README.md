@@ -82,7 +82,7 @@ kubectl apply -n argocd -f demo.yaml
 
 #### Get token
 ```sh
-echo "Bearer $(kubectl -n argo get secret $(kubectl -n argo get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}")"
+echo "Bearer $(kubectl -n argo get secret $(kubectl -n argo get sa/argo-admin -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}")"
 ```
 
 
