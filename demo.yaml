@@ -14,7 +14,7 @@ items:
         path: infrastructure/argo-events
       destination: &dest
         server: "https://kubernetes.default.svc"
-        namespace: demo
+        namespace: argo
       syncPolicy: &policy
         automated:
           prune: true
@@ -37,4 +37,4 @@ items:
   - apiVersion: v1
     kind: Namespace
     metadata:
-      name: demo
+      name: argo
