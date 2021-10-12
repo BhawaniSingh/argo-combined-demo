@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: webhook
+  name: webhook-sensor
 spec:
   template:
     serviceAccountName: operate-workflow-sa
@@ -16,7 +16,7 @@ spec:
           group: argoproj.io
           version: v1alpha1
           resource: workflows
-          operation: submit
+          operation: create
           source:
             resource:
               apiVersion: argoproj.io/v1alpha1
