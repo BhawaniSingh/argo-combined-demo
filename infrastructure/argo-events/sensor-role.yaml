@@ -5,7 +5,7 @@ metadata:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: argo-events-role
+  name: argo-events-role-1
 subjects:
   - kind: ServiceAccount
     name: argo-events-sa
@@ -16,7 +16,7 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: argo-events-role
+  name: argo-events-role-1
 rules:
   - apiGroups:
       - argoproj.io
