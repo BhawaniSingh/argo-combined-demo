@@ -24,6 +24,7 @@ spec:
               metadata:
                 generateName: webhook-
               spec:
+                serviceAccountName: operate-workflow-sa
                 entrypoint: whalesay
                 arguments:
                   parameters:
@@ -42,5 +43,5 @@ spec:
           parameters:
             - src:
                 dependencyName: payload
-                dataKey: body.message
+                dataKey: body
               dest: spec.arguments.parameters.0.value
