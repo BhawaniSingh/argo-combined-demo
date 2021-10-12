@@ -16,7 +16,7 @@ spec:
           group: argoproj.io
           version: v1alpha1
           resource: workflows
-          operation: create
+          operation: submit
           source:
             resource:
               apiVersion: argoproj.io/v1alpha1
@@ -24,7 +24,7 @@ spec:
               metadata:
                 generateName: webhook-
               spec:
-                serviceAccountName: operate-workflow-sa
+                serviceAccountName: workflow-pods-sa
                 entrypoint: whalesay
                 arguments:
                   parameters:
