@@ -24,7 +24,7 @@ spec:
               metadata:
                 generateName: webhook-
               spec:
-                serviceAccountName: workflow
+                serviceAccountName: argo
                 entrypoint: whalesay
                 arguments:
                   parameters:
