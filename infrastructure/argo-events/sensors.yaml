@@ -4,7 +4,7 @@ metadata:
   name: webhook-test
 spec:
   template:
-    serviceAccountName: operate-workflow-sa
+    serviceAccountName: argo-events-sa
   dependencies:
     - name: payload
       eventSourceName: webhook
@@ -23,9 +23,8 @@ spec:
               kind: Workflow
               metadata:
                 generateName: webhook-
-                namespace: argo
               spec:
-                serviceAccountName: argo-server
+                serviceAccountName: workflow
                 entrypoint: whalesay
                 arguments:
                   parameters:
