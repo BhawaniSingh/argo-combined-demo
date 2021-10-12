@@ -1,22 +1,14 @@
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+apiVersion: v1
+kind: ServiceAccount
 metadata:
-  name: argo-events-binding-1
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: argo-events-role-1
-subjects:
-  - kind: ServiceAccount
-    name: argo-events-sa
-    namespace: argo
-
+  namespace: argo
+  name: sensor-sa
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
-  name: argo-events-role-1
+  name: operate-workflow-role
+  namespace: argo
 rules:
   - apiGroups:
       - argoproj.io
@@ -77,3 +69,18 @@ rules:
       - update
       - patch
       - delete
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: operate-workflow-role-binding
+  namespace: argo
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: operate-workflow-role
+subjects:
+  - kind: ServiceAccount
+    name: sensor-sa
+    namespace: argo
