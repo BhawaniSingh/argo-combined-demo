@@ -2,10 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
+- sensor-role.yaml
 - https://raw.githubusercontent.com/argoproj/argo-events/v1.4.3/manifests/install.yaml
 - event-bus.yaml
 - event-sources.yaml
-- sensor-role.yaml
 - sensors.yaml
 
 namespace: argo
