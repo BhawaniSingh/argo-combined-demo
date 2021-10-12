@@ -20,22 +20,32 @@ spec:
               kind: Workflow
               metadata:
                 generateName: payload-
+                namespace: argo
+                labels:
+                  example: 'true'
               spec:
-                entrypoint: whalesay
                 arguments:
                   parameters:
                     - name: message
-                      # the value will get overridden by event payload from payload
-                      value: hello world
+                      value: hello argo
+                entrypoint: argosay
                 templates:
-                  - name: whalesay
+                  - name: argosay
                     inputs:
                       parameters:
                         - name: message
                     container:
-                      image: docker/whalesay:latest
-                      command: [cowsay]
-                      args: ["{{inputs.parameters.message}}"]
+                      name: main
+                      image: 'argoproj/argosay:v2'
+                      command:
+                        - /argosay
+                      args:
+                        - echo
+                        - '{{inputs.parameters.message}}'
+                ttlStrategy:
+                  secondsAfterCompletion: 300
+                podGC:
+                  strategy: OnPodCompletion
           parameters:
             - src:
                 dependencyName: payload
