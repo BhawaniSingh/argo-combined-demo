@@ -12,8 +12,11 @@ spec:
   triggers:
     - template:
         name: webhook-workflow-trigger
-        k8s:
-          operation: create
+        argoWorkflow:
+          group: argoproj.io
+          version: v1alpha1
+          resource: workflows
+          operation: submit
           source:
             resource:
               apiVersion: argoproj.io/v1alpha1
@@ -42,10 +45,6 @@ spec:
                       args:
                         - echo
                         - '{{inputs.parameters.message}}'
-                ttlStrategy:
-                  secondsAfterCompletion: 300
-                podGC:
-                  strategy: OnPodCompletion
           parameters:
             - src:
                 dependencyName: payload
