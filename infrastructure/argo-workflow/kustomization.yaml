@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
 - install.yaml
+- workflow-role.yaml
 
 patchesStrategicMerge:
 - argo-server-service.yaml
