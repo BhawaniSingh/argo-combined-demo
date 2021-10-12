@@ -23,6 +23,7 @@ spec:
               kind: Workflow
               metadata:
                 generateName: webhook-
+                namespace: argo
               spec:
                 serviceAccountName: workflow
                 entrypoint: whalesay
