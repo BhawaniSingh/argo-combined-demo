@@ -24,7 +24,7 @@ spec:
               metadata:
                 generateName: webhook-
               spec:
-                serviceAccountName: workflow-pods-sa
+                serviceAccountName: workflow
                 entrypoint: whalesay
                 arguments:
                   parameters:
