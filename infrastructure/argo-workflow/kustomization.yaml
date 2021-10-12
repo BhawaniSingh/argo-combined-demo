@@ -3,9 +3,9 @@ kind: Kustomization
 
 resources:
 - https://raw.githubusercontent.com/argoproj/argo-workflows/v3.1.13/manifests/install.yaml
+- workflow-controller-configmap.yaml
 
 patchesStrategicMerge:
-- workflow-controller-configmap.yaml
 - argo-server-service.yaml
 - argo-binding.yaml
 - argo-server-binding.yaml
