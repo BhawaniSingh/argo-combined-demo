@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Sensor
 metadata:
-  name: webhook-sensor
+  name: webhook-test
 spec:
   template:
     serviceAccountName: operate-workflow-sa
@@ -11,42 +11,43 @@ spec:
       eventName: test
   triggers:
     - template:
-        name: webhook-workflow-trigger
-        argoWorkflow:
-          group: argoproj.io
-          version: v1alpha1
-          resource: workflows
-          operation: create
-          source:
-            resource:
-              apiVersion: argoproj.io/v1alpha1
-              kind: Workflow
-              metadata:
-                generateName: payload-
-                namespace: argo
-                labels:
-                  example: 'true'
-              spec:
-                arguments:
-                  parameters:
-                    - name: message
-                      value: hello argo
-                entrypoint: argosay
-                templates:
-                  - name: argosay
-                    inputs:
-                      parameters:
-                        - name: message
-                    container:
-                      name: main
-                      image: 'argoproj/argosay:v2'
-                      command:
-                        - /argosay
-                      args:
-                        - echo
-                        - '{{inputs.parameters.message}}'
-          parameters:
-          - src:
-              dependencyName: payload
-              dataKey: body.message
-            dest: spec.arguments.parameters.0.value
+      name: webhook-workflow-trigger
+      argoWorkflow:
+        group: argoproj.io
+        version: v1alpha1
+        resource: workflows
+        operation: create
+        source:
+          resource:
+            apiVersion: argoproj.io/v1alpha1
+            kind: Workflow
+            metadata:
+              generateName: payload-
+              namespace: argo
+              labels:
+                example: 'true'
+            spec:
+              serviceAccountName: argo
+              arguments:
+                parameters:
+                  - name: message
+                    value: hello argo
+              entrypoint: argosay
+              templates:
+                - name: argosay
+                  inputs:
+                    parameters:
+                      - name: message
+                  container:
+                    name: main
+                    image: 'argoproj/argosay:v2'
+                    command:
+                      - /argosay
+                    args:
+                      - echo
+                      - '{{inputs.parameters.message}}'
+        parameters:
+        - src:
+            dependencyName: payload
+            dataKey: body.message
+          dest: spec.arguments.parameters.0.value
