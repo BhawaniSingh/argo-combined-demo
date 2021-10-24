@@ -43,6 +43,9 @@ EOF
 kubectl proxy
 ```
 
+
+
+
 #### open dashboard, wait for a minute or two proxy not always start right away
 Visit `http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/`
 
